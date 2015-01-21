@@ -13,7 +13,6 @@ namespace TechSupport.Model
         private string customer;
         private string technician;
         private string title; 
-        private int? techID;
         
         public Incidents() {}
 

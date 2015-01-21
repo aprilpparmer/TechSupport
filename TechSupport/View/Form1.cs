@@ -34,7 +34,6 @@ namespace TechSupport
         void f2_FormClosed(object sender, FormClosedEventArgs e)
         {
             f2 = null;
-            //throw new NotImplementedException();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
