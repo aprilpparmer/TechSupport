@@ -18,6 +18,8 @@ namespace TechSupport
         }
 
         Form2 f2;
+
+        //When form loads, it fills the pages and a menu is displayed
         private void displayOpenIncidentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (f2 == null)

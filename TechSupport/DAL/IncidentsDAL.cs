@@ -10,6 +10,7 @@ namespace TechSupport.DAL
 {
     class IncidentsDAL
     {
+        //Displays all open incidents
         public static List<Incidents> DisplayOpenIncidents()
         {
             List<Incidents> openIncidentsList = new List<Incidents>();

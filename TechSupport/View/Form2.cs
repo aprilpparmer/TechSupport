@@ -19,6 +19,7 @@ namespace TechSupport
             InitializeComponent();
         }
 
+        //When form loads, all open incidents are displayed
         private void Form2_Load(object sender, EventArgs e)
         {
             listViewOpenIncidents.Items.Clear();
