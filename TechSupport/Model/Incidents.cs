@@ -12,7 +12,8 @@ namespace TechSupport.Model
         private DateTime dateOpened;
         private string customer;
         private string technician;
-        private string title;    
+        private string title; 
+        private int? techID;
         
         public Incidents() {}
 

@@ -18,8 +18,8 @@ namespace TechSupport.DAL
                 "SELECT i.ProductCode, i.DateOpened, i.Title, " +
                 "c.Name AS Customer, t.Name AS Technician " +
                 "FROM Incidents i " +
-                    "JOIN Technicians t ON t.TechID = i.TechID " +
-                    "JOIN Customers c ON c.CustomerID = i.CustomerID " +
+                    "LEFT OUTER JOIN Technicians t ON t.TechID = i.TechID " +
+                    "LEFT OUTER JOIN Customers c ON c.CustomerID = i.CustomerID " +
                 "WHERE i.DateClosed IS NULL " +
                 "ORDER BY i.DateOpened";
             SqlCommand selectCommand = new SqlCommand(selectStatement, connection);
