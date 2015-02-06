@@ -7,8 +7,15 @@ using System.Data.SqlClient;
 
 namespace TechSupport.DAL
 {
+    /// <summary>
+    /// Provides the information for the database connection
+    /// </summary>
     public static class DBConnection
     {
+        /// <summary>
+        /// Gets the database connection
+        /// </summary>
+        /// <returns>Connection to TechSupport database</returns>
         public static SqlConnection GetConnection()
         {
             string connectionString =

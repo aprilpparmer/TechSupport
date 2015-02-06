@@ -13,6 +13,9 @@ using TechSupport.Controller;
 
 namespace TechSupport
 {
+    /// <summary>
+    /// Creates a form to display all open incidents
+    /// </summary>
     public partial class OpenIncidentsForm : Form
     {
         private IncidentsController inController;
@@ -22,7 +25,11 @@ namespace TechSupport
             inController = new IncidentsController();
         }
 
-        //When form loads, all open incidents are displayed
+        /// <summary>
+        /// When form loads, all open incidents are displayed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form2_Load(object sender, EventArgs e)
         {
             listViewOpenIncidents.Items.Clear();

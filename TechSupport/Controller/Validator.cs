@@ -7,6 +7,7 @@ using System.Windows.Forms;
 
 namespace TechSupport.Controller
 {
+    //Validates information entered into a form
     class Validator
     {
         private static string title = "Entry Error";
@@ -51,7 +52,5 @@ namespace TechSupport.Controller
             }
             return true;
         }
-
-
     }
 }

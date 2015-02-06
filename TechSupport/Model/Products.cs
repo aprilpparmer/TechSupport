@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace TechSupport.Model
 {
+    /// <summary>
+    /// Gets and sets all appropriate values for the Products class
+    /// </summary>
     class Products
     {
         private string productName;

@@ -9,9 +9,15 @@ using TechSupport.Model;
 
 namespace TechSupport.DAL
 {
+    /// <summary>
+    /// Gets information from the Products database
+    /// </summary>
     class ProductsDAL
     {
-        //Displays all product names
+        /// <summary>
+        /// Gets all of the product names from the database
+        /// </summary>
+        /// <returns>List of product names</returns>
         public static List<Products> GetAllProducts()
         {
             List<Products> productList = new List<Products>();

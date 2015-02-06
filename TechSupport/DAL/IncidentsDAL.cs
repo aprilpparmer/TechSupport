@@ -8,9 +8,15 @@ using System.Data.SqlClient;
 
 namespace TechSupport.DAL
 {
+    /// <summary>
+    /// Gets information from the Incidents database
+    /// </summary>
     class IncidentsDAL
     {
-        //Displays all open incidents
+        /// <summary>
+        /// Gets all open incidents in the database
+        /// </summary>
+        /// <returns></returns>
         public static List<Incidents> DisplayOpenIncidents()
         {
             List<Incidents> openIncidentsList = new List<Incidents>();
@@ -51,7 +57,11 @@ namespace TechSupport.DAL
             return openIncidentsList;
         }
 
-        //Adds an incident to the database
+        /// <summary>
+        /// Adds a new Incident to the database
+        /// </summary>
+        /// <param name="incident">Incident to add to the database</param>
+        /// <returns>IncidentID of the new Incident</returns>
         public static int AddIncident(Incidents incident) {
             SqlConnection connection = DBConnection.GetConnection();
             string insertStatement =

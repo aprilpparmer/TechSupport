@@ -8,10 +8,17 @@ using TechSupport.Model;
 
 namespace TechSupport.Controller
 {
+    /// <summary>
+    /// Interacts with the ProductsDAL to deliver information to the view.
+    /// </summary>
     class ProductsController
     {
         public ProductsController() {}
 
+        /// <summary>
+        /// Gets all of the product names in the database.
+        /// </summary>
+        /// <returns>List of all product names</returns>
         public List<Products> GetAllProducts()
         {
             return ProductsDAL.GetAllProducts();

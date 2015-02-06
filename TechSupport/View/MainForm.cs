@@ -12,6 +12,9 @@ using TechSupport.Controller;
 
 namespace TechSupport
 {
+    /// <summary>
+    /// Displays the main (parent) form of the application. 
+    /// </summary>
     public partial class MainForm : Form
     {
         public MainForm()
@@ -22,7 +25,11 @@ namespace TechSupport
         OpenIncidentsForm f2;
         CreateIncidentForm cif;
 
-        //When form loads, it fills the pages and a menu is displayed
+        /// <summary>
+        /// Displays the Open Incidents Form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void displayOpenIncidentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (f2 == null)
@@ -36,16 +43,31 @@ namespace TechSupport
                 f2.Activate();
         }
 
-        void f2_FormClosed(object sender, FormClosedEventArgs e)
+        /// <summary>
+        /// Sets the Display Open Incidents Form to closed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void f2_FormClosed(object sender, FormClosedEventArgs e)
         {
             f2 = null;
         }
 
+        /// <summary>
+        /// When selected, the application exits
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
+        /// <summary>
+        /// Displays the Create Incident Form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void createIncidentToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (cif == null)
@@ -59,6 +81,11 @@ namespace TechSupport
                 cif.Activate();
         }
 
+        /// <summary>
+        /// Sets the Create Incident Form to closed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void cif_FormClosed(object sender, FormClosedEventArgs e)
         {
             cif = null;

@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace TechSupport.Model
 {
+    /// <summary>
+    /// Gets and sets all of the appropriate values of the Incidents class
+    /// </summary>
     public class Incidents
     {
-        private string customerID;
         private string productCode;
         private string productName;
         private DateTime dateOpened;

@@ -8,22 +8,31 @@ using TechSupport.DAL;
 
 namespace TechSupport.Controller
 {
-    //Interacts with the DAL
+    /// <summary>
+    /// Interacts with the IncidentsDAL to deliver information to the view
+    /// </summary>
     class IncidentsController
     {
         public IncidentsController()
         {
         }
 
-        //Calls the DisplayOpenIncidents method of the IncidentsDAL class
-        //to display all open incidents in the database.
+        /// <summary>
+        /// Calls the DisplayOpenIncidents method of the IncidentsDAL class
+        /// to display all open incidents in the database.
+        /// </summary>
+        /// <returns>List of open incidents</returns>
         public List<Incidents> DisplayOpenIncidents()
         {
             return IncidentsDAL.DisplayOpenIncidents();
         }
 
-        //Calls the AddIncident method of the IncidentsDAL class
-        //to add a new incident to the database
+        /// <summary>
+        /// Calls the AddIncident method of the IncidentsDAL class 
+        /// to add a new incident to the database
+        /// </summary>
+        /// <param name="incident">Incident to add to the database</param>
+        /// <returns>IncidentID of the new Incident</returns>
         public static int AddIncident(Incidents incident)
         {
             return IncidentsDAL.AddIncident(incident);

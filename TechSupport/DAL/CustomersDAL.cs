@@ -9,9 +9,15 @@ using TechSupport.Controller;
 
 namespace TechSupport.DAL
 {
+    /// <summary>
+    /// Gets information from the Customers database
+    /// </summary>
     class CustomersDAL
     {
-        //Displays all customer names
+        /// <summary>
+        /// Gets all customer names from the database
+        /// </summary>
+        /// <returns></returns>
         public static List<Customers> GetAllCustomers()
         {
             List<Customers> customerList = new List<Customers>();

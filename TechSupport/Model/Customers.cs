@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace TechSupport.Model
 {
+    /// <summary>
+    /// Gets and sets all of the appropriate values of the Customers class
+    /// </summary>
     class Customers
     {
         private string customerName;

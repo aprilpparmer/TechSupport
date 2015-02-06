@@ -13,6 +13,9 @@ using TechSupport.Controller;
 
 namespace TechSupport.View
 {
+    /// <summary>
+    /// Creates a form used to add a new incident to the database
+    /// </summary>
     public partial class CreateIncidentForm : Form
     {
         private CustomersController custController;
@@ -28,6 +31,9 @@ namespace TechSupport.View
             this.loadProductNames();
         }
 
+        /// <summary>
+        /// Loads the customer names into a combo box
+        /// </summary>
         private void loadCustomerNames()
         {
             List<Customers> customerList;
@@ -57,6 +63,9 @@ namespace TechSupport.View
             }
         }
 
+        /// <summary>
+        /// Loads the product names into a combo box
+        /// </summary>
         private void loadProductNames()
         {
             List<Products> productList;
@@ -86,6 +95,11 @@ namespace TechSupport.View
             }
         }
 
+        /// <summary>
+        /// When clicked, a new incident is created in the database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void createIncidentBtn_Click(object sender, EventArgs e)
         {
             if (IsValidData())
@@ -105,6 +119,10 @@ namespace TechSupport.View
             }
         }
 
+        /// <summary>
+        /// Sets the data in the form to an Incident object to be added to the database
+        /// </summary>
+        /// <param name="incident"></param>
         private void PutIncidentData(Incidents incident)
         {
             incident.CustomerName = customerComboBox.Text;
@@ -114,6 +132,10 @@ namespace TechSupport.View
             incident.Description = descriptionTextBox.Text;
         }
 
+        /// <summary>
+        /// Checks if any fields are left blank
+        /// </summary>
+        /// <returns></returns>
         private bool IsValidData()
         {
             if (Validator.IsPresent(customerComboBox) &&
@@ -125,6 +147,11 @@ namespace TechSupport.View
                 return false;
         }
 
+        /// <summary>
+        /// Closes the form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cancelBtn_Click(object sender, EventArgs e)
         {
             Close();

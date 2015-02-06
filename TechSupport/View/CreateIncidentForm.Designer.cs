@@ -85,7 +85,8 @@
             this.titleTextBox.Location = new System.Drawing.Point(158, 116);
             this.titleTextBox.Name = "titleTextBox";
             this.titleTextBox.Size = new System.Drawing.Size(223, 20);
-            this.titleTextBox.TabIndex = 4;
+            this.titleTextBox.TabIndex = 3;
+            this.titleTextBox.Tag = "Title";
             // 
             // customerComboBox
             // 
@@ -93,7 +94,8 @@
             this.customerComboBox.Location = new System.Drawing.Point(158, 33);
             this.customerComboBox.Name = "customerComboBox";
             this.customerComboBox.Size = new System.Drawing.Size(223, 21);
-            this.customerComboBox.TabIndex = 5;
+            this.customerComboBox.TabIndex = 1;
+            this.customerComboBox.Tag = "CustomerName";
             // 
             // descriptionTextBox
             // 
@@ -101,7 +103,8 @@
             this.descriptionTextBox.Multiline = true;
             this.descriptionTextBox.Name = "descriptionTextBox";
             this.descriptionTextBox.Size = new System.Drawing.Size(223, 126);
-            this.descriptionTextBox.TabIndex = 6;
+            this.descriptionTextBox.TabIndex = 4;
+            this.descriptionTextBox.Tag = "Description";
             // 
             // productComboBox
             // 
@@ -109,7 +112,8 @@
             this.productComboBox.Location = new System.Drawing.Point(158, 72);
             this.productComboBox.Name = "productComboBox";
             this.productComboBox.Size = new System.Drawing.Size(223, 21);
-            this.productComboBox.TabIndex = 7;
+            this.productComboBox.TabIndex = 2;
+            this.productComboBox.Tag = "ProductName";
             // 
             // createIncidentBtn
             // 
@@ -117,7 +121,7 @@
             this.createIncidentBtn.Location = new System.Drawing.Point(158, 290);
             this.createIncidentBtn.Name = "createIncidentBtn";
             this.createIncidentBtn.Size = new System.Drawing.Size(126, 28);
-            this.createIncidentBtn.TabIndex = 8;
+            this.createIncidentBtn.TabIndex = 5;
             this.createIncidentBtn.Text = "Create Incident";
             this.createIncidentBtn.UseVisualStyleBackColor = true;
             this.createIncidentBtn.Click += new System.EventHandler(this.createIncidentBtn_Click);
@@ -128,7 +132,7 @@
             this.cancelBtn.Location = new System.Drawing.Point(290, 290);
             this.cancelBtn.Name = "cancelBtn";
             this.cancelBtn.Size = new System.Drawing.Size(91, 28);
-            this.cancelBtn.TabIndex = 9;
+            this.cancelBtn.TabIndex = 6;
             this.cancelBtn.Text = "Cancel";
             this.cancelBtn.UseVisualStyleBackColor = true;
             this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
