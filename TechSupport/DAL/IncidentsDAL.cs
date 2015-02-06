@@ -33,7 +33,7 @@ namespace TechSupport.DAL
                     Incidents incident = new Incidents();
                     incident.ProductCode = reader["ProductCode"].ToString();
                     incident.DateOpened = (DateTime)reader["DateOpened"];
-                    incident.Customer = reader["Customer"].ToString();
+                    incident.CustomerName = reader["Customer"].ToString();
                     incident.Technician = reader["Technician"].ToString();
                     incident.Title = reader["Title"].ToString();
                     openIncidentsList.Add(incident);
@@ -59,7 +59,7 @@ namespace TechSupport.DAL
                     "(CustomerID, ProductCode, DateOpened, Title, Description) " +
                     "VALUES ((SELECT CustomerID FROM Customers WHERE Name = @CustomerName), " +
                     "(SELECT ProductCode FROM Products WHERE Name = @ProductName), " + 
-                    "@DateOpened, @Title, @Description ";
+                    "@DateOpened, @Title, @Description)";
             SqlCommand insertCommand = new SqlCommand(insertStatement, connection);
             insertCommand.Parameters.AddWithValue("@CustomerName", incident.CustomerName);
             insertCommand.Parameters.AddWithValue("@ProductName", incident.ProductName);
@@ -77,8 +77,14 @@ namespace TechSupport.DAL
                 int incidentID = Convert.ToInt32(selectCommand.ExecuteScalar());
                 return incidentID;
             }
-
-
+           catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
     }
 }

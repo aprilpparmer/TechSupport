@@ -8,6 +8,8 @@ namespace TechSupport.Model
 {
     public class Incidents
     {
+        private string customerID;
+        private string productCode;
         private string productName;
         private DateTime dateOpened;
         private string customerName;
@@ -17,6 +19,18 @@ namespace TechSupport.Model
         private int incidentID;
         
         public Incidents() {}
+
+        public string ProductCode
+        {
+            get
+            {
+                return productCode;
+            }
+            set
+            {
+                productCode = value;
+            }
+        }
 
         public int IncidentID
         {

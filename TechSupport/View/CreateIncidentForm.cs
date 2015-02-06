@@ -48,6 +48,7 @@ namespace TechSupport.View
                     MessageBox.Show("There are no customer names to display.");
                     this.Close();
                 }
+                customerComboBox.SelectedIndex = 0;
             }
             catch (Exception ex)
             {
@@ -76,6 +77,7 @@ namespace TechSupport.View
                     MessageBox.Show("There are no product names to display.");
                     this.Close();
                 }
+                productComboBox.SelectedIndex = 0;
             }
             catch (Exception ex)
             {
@@ -88,24 +90,25 @@ namespace TechSupport.View
         {
             if (IsValidData())
             {
-                incident = new Incidents();
-                this.PutIncidentData(incident);
-                try
-                {
-                    incident.IncidentID = IncidentsController.AddIncident(incident);
-                    this.DialogResult = DialogResult.OK;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, ex.GetType().ToString());
-                }
+                    incident = new Incidents();
+                    this.PutIncidentData(incident);
+                    try
+                    {
+                        incident.IncidentID = IncidentsController.AddIncident(incident);
+                        MessageBox.Show("You have successfully added a new incident.");
+                        Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, ex.GetType().ToString());
+                    }
             }
         }
 
         private void PutIncidentData(Incidents incident)
         {
-            incident.CustomerName = customerComboBox.SelectedValue.ToString();
-            incident.ProductName = productComboBox.SelectedValue.ToString();
+            incident.CustomerName = customerComboBox.Text;
+            incident.ProductName = productComboBox.Text;
             incident.DateOpened = DateTime.Now;
             incident.Title = titleTextBox.Text;
             incident.Description = descriptionTextBox.Text;
@@ -120,6 +123,11 @@ namespace TechSupport.View
                 return true;
             else
                 return false;
+        }
+
+        private void cancelBtn_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

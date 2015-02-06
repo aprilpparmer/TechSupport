@@ -38,7 +38,7 @@ namespace TechSupport
                         incident = incidentsList[i];
                         listViewOpenIncidents.Items.Add(incident.ProductCode);
                         listViewOpenIncidents.Items[i].SubItems.Add(incident.DateOpened.ToShortDateString());
-                        listViewOpenIncidents.Items[i].SubItems.Add(incident.Customer);
+                        listViewOpenIncidents.Items[i].SubItems.Add(incident.CustomerName);
                         listViewOpenIncidents.Items[i].SubItems.Add(incident.Technician);
                         listViewOpenIncidents.Items[i].SubItems.Add(incident.Title);
                     }   
