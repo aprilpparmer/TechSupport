@@ -9,14 +9,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TechSupport.Model;
 using TechSupport.DAL;
+using TechSupport.Controller;
 
 namespace TechSupport
 {
-    public partial class Form2 : Form
+    public partial class OpenIncidentsForm : Form
     {
-        public Form2()
+        private IncidentsController inController;
+        public OpenIncidentsForm()
         {
             InitializeComponent();
+            inController = new IncidentsController();
         }
 
         //When form loads, all open incidents are displayed
@@ -26,7 +29,7 @@ namespace TechSupport
             List<Incidents> incidentsList;
             try
             {
-                incidentsList = IncidentsDAL.DisplayOpenIncidents();
+                incidentsList = this.inController.DisplayOpenIncidents();
                 if (incidentsList.Count > 0)
                 {
                     Incidents incident;

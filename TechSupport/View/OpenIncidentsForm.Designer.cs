@@ -1,6 +1,6 @@
 ﻿namespace TechSupport
 {
-    partial class Form2
+    partial class OpenIncidentsForm
     {
         /// <summary>
         /// Required designer variable.
