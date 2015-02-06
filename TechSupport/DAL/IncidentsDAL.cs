@@ -50,5 +50,35 @@ namespace TechSupport.DAL
             }
             return openIncidentsList;
         }
+
+        //Adds an incident to the database
+        public static int AddIncident(Incidents incident) {
+            SqlConnection connection = DBConnection.GetConnection();
+            string insertStatement =
+                "INSERT INTO Incidents " +
+                    "(CustomerID, ProductCode, DateOpened, Title, Description) " +
+                    "VALUES ((SELECT CustomerID FROM Customers WHERE Name = @CustomerName), " +
+                    "(SELECT ProductCode FROM Products WHERE Name = @ProductName), " + 
+                    "@DateOpened, @Title, @Description ";
+            SqlCommand insertCommand = new SqlCommand(insertStatement, connection);
+            insertCommand.Parameters.AddWithValue("@CustomerName", incident.CustomerName);
+            insertCommand.Parameters.AddWithValue("@ProductName", incident.ProductName);
+            insertCommand.Parameters.AddWithValue("@DateOpened", incident.DateOpened);
+            insertCommand.Parameters.AddWithValue("@Title", incident.Title);
+            insertCommand.Parameters.AddWithValue("@Description", incident.Description);
+
+            try
+            {
+                connection.Open();
+                insertCommand.ExecuteNonQuery();
+                string selectStatement =
+                    "SELECT IDENT_CURRENT('Incidents') FROM Incidents";
+                SqlCommand selectCommand = new SqlCommand(selectStatement, connection);
+                int incidentID = Convert.ToInt32(selectCommand.ExecuteScalar());
+                return incidentID;
+            }
+
+
+        }
     }
 }

@@ -21,5 +21,12 @@ namespace TechSupport.Controller
         {
             return IncidentsDAL.DisplayOpenIncidents();
         }
+
+        //Calls the AddIncident method of the IncidentsDAL class
+        //to add a new incident to the database
+        public static int AddIncident(Incidents incident)
+        {
+            return IncidentsDAL.AddIncident(incident);
+        }
     }
 }

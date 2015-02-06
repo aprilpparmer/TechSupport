@@ -8,23 +8,48 @@ namespace TechSupport.Model
 {
     public class Incidents
     {
-        private string productCode;
+        private string productName;
         private DateTime dateOpened;
-        private string customer;
+        private string customerName;
         private string technician;
-        private string title; 
+        private string title;
+        private string description;
+        private int incidentID;
         
         public Incidents() {}
 
-        public string ProductCode
+        public int IncidentID
         {
             get
             {
-                return productCode;
+                return incidentID;
             }
             set
             {
-                productCode = value;
+                incidentID = value;
+            }
+        }
+
+        public string Description
+        {
+            get
+            {
+                return description;
+            }
+            set
+            {
+                description = value;
+            }
+        }
+        public string ProductName
+        {
+            get
+            {
+                return productName;
+            }
+            set
+            {
+                productName = value;
             }
         }
 
@@ -40,15 +65,15 @@ namespace TechSupport.Model
             }
         }
 
-        public string Customer
+        public string CustomerName
         {
             get
             {
-                return customer;
+                return customerName;
             }
             set
             {
-                customer = value;
+                customerName = value;
             }
         }
 

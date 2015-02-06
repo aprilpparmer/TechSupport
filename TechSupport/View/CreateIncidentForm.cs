@@ -17,6 +17,8 @@ namespace TechSupport.View
     {
         private CustomersController custController;
         private ProductsController prodController;
+        private Incidents incident;
+
         public CreateIncidentForm()
         {
             InitializeComponent();
@@ -84,7 +86,29 @@ namespace TechSupport.View
 
         private void createIncidentBtn_Click(object sender, EventArgs e)
         {
+            if (IsValidData())
+            {
+                incident = new Incidents();
+                this.PutIncidentData(incident);
+                try
+                {
+                    incident.IncidentID = IncidentsController.AddIncident(incident);
+                    this.DialogResult = DialogResult.OK;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, ex.GetType().ToString());
+                }
+            }
+        }
 
+        private void PutIncidentData(Incidents incident)
+        {
+            incident.CustomerName = customerComboBox.SelectedValue.ToString();
+            incident.ProductName = productComboBox.SelectedValue.ToString();
+            incident.DateOpened = DateTime.Now;
+            incident.Title = titleTextBox.Text;
+            incident.Description = descriptionTextBox.Text;
         }
 
         private bool IsValidData()
