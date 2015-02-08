@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using TechSupport.Model;
 using TechSupport.DAL;
 using TechSupport.Controller;
+using System.Data.SqlClient;
 
 namespace TechSupport
 {
@@ -56,7 +57,7 @@ namespace TechSupport
                     this.Close();
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 MessageBox.Show(ex.Message, ex.GetType().ToString());
                 this.Close();

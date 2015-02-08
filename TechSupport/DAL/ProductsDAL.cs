@@ -20,32 +20,40 @@ namespace TechSupport.DAL
         /// <returns>List of product names</returns>
         public static List<Products> GetAllProducts()
         {
-            List<Products> productList = new List<Products>();
-            SqlConnection connection = DBConnection.GetConnection();
-            string selectStatement =
-                "SELECT Name FROM Products ";
-            SqlCommand selectCommand = new SqlCommand(selectStatement, connection);
             try
             {
-                connection.Open();
-                SqlDataReader reader = selectCommand.ExecuteReader();
-                while (reader.Read())
+                List<Products> productList = new List<Products>();
+                SqlConnection connection = DBConnection.GetConnection();
+                string selectStatement =
+                    "SELECT Name FROM Products ";
+                SqlCommand selectCommand = new SqlCommand(selectStatement, connection);
+                try
                 {
-                    Products product = new Products();
-                    product.ProductName = reader["Name"].ToString();
-                    productList.Add(product);
+                    connection.Open();
+                    SqlDataReader reader = selectCommand.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Products product = new Products();
+                        product.ProductName = reader["Name"].ToString();
+                        productList.Add(product);
+                    }
+                    reader.Close();
                 }
-                reader.Close();
+                catch (SqlException ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+                return productList;
             }
             catch (SqlException ex)
             {
                 throw ex;
             }
-            finally
-            {
-                connection.Close();
             }
-            return productList;
-        }
+
     }
 }

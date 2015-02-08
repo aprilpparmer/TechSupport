@@ -18,11 +18,18 @@ namespace TechSupport.DAL
         /// <returns>Connection to TechSupport database</returns>
         public static SqlConnection GetConnection()
         {
-            string connectionString =
-                "Data Source=localhost;Initial Catalog=TechSupport;" +
-                "Integrated Security=True;";
-            SqlConnection connection = new SqlConnection(connectionString);
-            return connection;
-        }
+            try
+            {
+                string connectionString =
+                    "Data Source=localhost;Initial Catalog=Payables;" +
+                    "Integrated Security=True;";
+                SqlConnection connection = new SqlConnection(connectionString);
+                return connection;
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            }
     }
 }

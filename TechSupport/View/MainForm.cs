@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TechSupport.View;
 using TechSupport.Controller;
+using System.Data.SqlClient;
 
 namespace TechSupport
 {
@@ -70,15 +71,23 @@ namespace TechSupport
         /// <param name="e"></param>
         private void createIncidentToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (cif == null)
+            try
             {
-                cif = new CreateIncidentForm();
-                cif.MdiParent = this;
-                cif.FormClosed += cif_FormClosed;
-                cif.Show();
+                if (cif == null)
+                {
+                    cif = new CreateIncidentForm();
+                    cif.MdiParent = this;
+                    cif.FormClosed += cif_FormClosed;
+                    cif.Show();
+                }
+                else
+                    cif.Activate();
             }
-            else
-                cif.Activate();
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().ToString());
+                this.Close();
+            }
         }
 
         /// <summary>

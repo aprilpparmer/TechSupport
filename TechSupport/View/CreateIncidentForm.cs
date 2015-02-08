@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TechSupport.Model;
 using TechSupport.Controller;
+using System.Data.SqlClient;
 
 
 namespace TechSupport.View
@@ -56,7 +57,7 @@ namespace TechSupport.View
                 }
                 customerComboBox.SelectedIndex = 0;
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 MessageBox.Show(ex.Message, ex.GetType().ToString());
                 this.Close();
@@ -88,7 +89,7 @@ namespace TechSupport.View
                 }
                 productComboBox.SelectedIndex = 0;
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 MessageBox.Show(ex.Message, ex.GetType().ToString());
                 this.Close();
@@ -112,7 +113,7 @@ namespace TechSupport.View
                         MessageBox.Show("You have successfully added a new incident.");
                         Close();
                     }
-                    catch (Exception ex)
+                    catch (SqlException ex)
                     {
                         MessageBox.Show(ex.Message, ex.GetType().ToString());
                     }
