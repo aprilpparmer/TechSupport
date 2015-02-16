@@ -20,39 +20,37 @@ namespace TechSupport.DAL
         /// <returns></returns>
         public static List<Customers> GetAllCustomers()
         {
+            List<Customers> customerList = new List<Customers>();
+            string selectStatement =
+                    "SELECT Name FROM Customers ORDER BY Name ASC ";
             try
             {
-                List<Customers> customerList = new List<Customers>();
-                SqlConnection connection = DBConnection.GetConnection();
-                string selectStatement =
-                    "SELECT Name FROM Customers ORDER BY Name ASC ";
-                SqlCommand selectCommand = new SqlCommand(selectStatement, connection);
-                try
+                using (SqlConnection connection = DBConnection.GetConnection())
                 {
                     connection.Open();
-                    SqlDataReader reader = selectCommand.ExecuteReader();
-                    while (reader.Read())
+                    using (SqlCommand selectCommand = new SqlCommand(selectStatement, connection))
                     {
-                        Customers customer = new Customers();
-                        customer.CustomerName = reader["Name"].ToString();
-                        customerList.Add(customer);
+                        using (SqlDataReader reader = selectCommand.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Customers customer = new Customers();
+                                customer.CustomerName = reader["Name"].ToString();
+                                customerList.Add(customer);
+                            }
+                        }
                     }
-                    reader.Close();
                 }
-                catch (SqlException ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                    connection.Close();
-                }
-                return customerList;
             }
             catch (SqlException ex)
             {
                 throw ex;
             }
-        }
-    }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return customerList;
+          }
+     }
 }

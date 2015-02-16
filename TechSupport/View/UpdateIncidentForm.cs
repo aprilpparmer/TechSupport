@@ -118,5 +118,69 @@ namespace TechSupport.View
                 MessageBox.Show(ex.Message, ex.GetType().ToString());
             }
         }
+
+        private void updateIncidentButton_Click(object sender, EventArgs e)
+        {
+            Incidents newIncident = new Incidents();
+            newIncident.IncidentID = incident.IncidentID;
+            this.PutIncidentData(newIncident);
+            try
+                {
+                    bool updated = IncidentsController.UpdateIncident(incident, newIncident);
+
+                    if (updated)
+                    {
+                        MessageBox.Show("You have successfully updated the incident.");
+                        Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("The incident could not be updated at ths time");
+                    }
+                }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().ToString());
+            }
+        }
+
+        private void PutIncidentData(Incidents incident)
+        {
+            incident.TechID = TechniciansController.GetTechID(technicianComboBox.SelectedItem.ToString());
+            incident.Description = txtDescription.Text + Environment.NewLine + 
+                "<" + DateTime.Now.ToString("d") + "> " + txtToAdd.Text;
+        }
+
+        private void closeIncidentButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                bool updated = IncidentsController.CloseIncident(incident.IncidentID);
+
+                if (updated)
+                {
+                    MessageBox.Show("You have successfully closed the incident.");
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("The incident could not be closed at ths time");
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().ToString());
+            }
+        }
+
+
     }
 }

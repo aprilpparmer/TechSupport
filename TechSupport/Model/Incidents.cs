@@ -19,8 +19,21 @@ namespace TechSupport.Model
         private string title;
         private string description;
         private int incidentID;
+        private int techID;
         
         public Incidents() {}
+
+        public int TechID
+        {
+            get
+            {
+                return techID;
+            }
+            set
+            {
+                techID = value;
+            }
+        }
 
         public string ProductCode
         {

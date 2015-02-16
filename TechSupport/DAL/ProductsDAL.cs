@@ -20,39 +20,35 @@ namespace TechSupport.DAL
         /// <returns>List of product names</returns>
         public static List<Products> GetAllProducts()
         {
-            try
-            {
-                List<Products> productList = new List<Products>();
-                SqlConnection connection = DBConnection.GetConnection();
-                string selectStatement =
-                    "SELECT Name FROM Products ";
-                SqlCommand selectCommand = new SqlCommand(selectStatement, connection);
-                try
-                {
+            List<Products> productList = new List<Products>();
+            string selectStatement = "SELECT Name FROM Products ";
+            try {
+                using (SqlConnection connection = DBConnection.GetConnection())
+                { 
                     connection.Open();
-                    SqlDataReader reader = selectCommand.ExecuteReader();
-                    while (reader.Read())
+                    using (SqlCommand selectCommand = new SqlCommand(selectStatement, connection))
                     {
-                        Products product = new Products();
-                        product.ProductName = reader["Name"].ToString();
-                        productList.Add(product);
+                        using (SqlDataReader reader = selectCommand.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Products product = new Products();
+                                product.ProductName = reader["Name"].ToString();
+                                productList.Add(product);
+                            }
+                        }
                     }
-                    reader.Close();
                 }
-                catch (SqlException ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                    connection.Close();
-                }
-                return productList;
             }
             catch (SqlException ex)
             {
                 throw ex;
             }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return productList;
         }
     }
 }

@@ -21,5 +21,10 @@ namespace TechSupport.Controller
         {
             return TechniciansDAL.GetAllTechnicians();
         }
+
+        public static int GetTechID(String techName)
+        {
+            return TechniciansDAL.GetTechID(techName);
+        }
     }
 }

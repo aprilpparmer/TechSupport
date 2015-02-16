@@ -48,5 +48,22 @@ namespace TechSupport.Controller
         {
             return IncidentsDAL.GetIncident(incidentID);
         }
+
+        /// <summary>
+        /// Calls the UpdateIncident method of the IncidentsDAL class
+        /// to update the Incident's information
+        /// </summary>
+        /// <param name="oldIncident">Old Incident Information</param>
+        /// <param name="newIncident">New Incident Information</param>
+        /// <returns></returns>
+        public static bool UpdateIncident(Incidents oldIncident, Incidents newIncident)
+        {
+            return IncidentsDAL.UpdateIncident(oldIncident, newIncident);
+        }
+
+        public static bool CloseIncident(int incidentID)
+        {
+            return IncidentsDAL.CloseIncident(incidentID);
+        }
     }
 }

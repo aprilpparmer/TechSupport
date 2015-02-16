@@ -224,6 +224,7 @@
             this.updateIncidentButton.TabIndex = 5;
             this.updateIncidentButton.Text = "Update";
             this.updateIncidentButton.UseVisualStyleBackColor = true;
+            this.updateIncidentButton.Click += new System.EventHandler(this.updateIncidentButton_Click);
             // 
             // closeIncidentButton
             // 
@@ -234,6 +235,7 @@
             this.closeIncidentButton.TabIndex = 6;
             this.closeIncidentButton.Text = "Close Incident";
             this.closeIncidentButton.UseVisualStyleBackColor = true;
+            this.closeIncidentButton.Click += new System.EventHandler(this.closeIncidentButton_Click);
             // 
             // cancelButton
             // 
