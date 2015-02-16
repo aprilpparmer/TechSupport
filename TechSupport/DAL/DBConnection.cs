@@ -21,7 +21,7 @@ namespace TechSupport.DAL
             try
             {
                 string connectionString =
-                    "Data Source=localhost;Initial Catalog=Payables;" +
+                    "Data Source=localhost;Initial Catalog=TechSupport;" +
                     "Integrated Security=True;";
                 SqlConnection connection = new SqlConnection(connectionString);
                 return connection;

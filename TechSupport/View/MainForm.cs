@@ -25,6 +25,7 @@ namespace TechSupport
 
         OpenIncidentsForm f2;
         CreateIncidentForm cif;
+        UpdateIncidentForm uif;
 
         /// <summary>
         /// Displays the Open Incidents Form
@@ -98,6 +99,32 @@ namespace TechSupport
         void cif_FormClosed(object sender, FormClosedEventArgs e)
         {
             cif = null;
+        }
+
+        /// <summary>
+        /// Displays the Update Incident Form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void updateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (uif == null)
+                {
+                    uif = new UpdateIncidentForm();
+                    uif.MdiParent = this;
+                    uif.FormClosed += cif_FormClosed;
+                    uif.Show();
+                }
+                else
+                    uif.Activate();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().ToString());
+                this.Close();
+            }
         }
     }
 }

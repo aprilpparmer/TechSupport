@@ -25,11 +25,11 @@ namespace TechSupport.View
 
         public CreateIncidentForm()
         {
-            InitializeComponent();
-            custController = new CustomersController();
-            prodController = new ProductsController();
-            this.loadCustomerNames();
-            this.loadProductNames();
+                InitializeComponent();
+                custController = new CustomersController();
+                prodController = new ProductsController();
+                this.loadCustomerNames();
+                this.loadProductNames();
         }
 
         /// <summary>
@@ -60,7 +60,6 @@ namespace TechSupport.View
             catch (SqlException ex)
             {
                 MessageBox.Show(ex.Message, ex.GetType().ToString());
-                this.Close();
             }
         }
 
@@ -92,7 +91,6 @@ namespace TechSupport.View
             catch (SqlException ex)
             {
                 MessageBox.Show(ex.Message, ex.GetType().ToString());
-                this.Close();
             }
         }
 

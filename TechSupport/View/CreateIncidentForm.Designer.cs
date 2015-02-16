@@ -90,8 +90,10 @@
             // 
             // customerComboBox
             // 
+            this.customerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.customerComboBox.FormattingEnabled = true;
             this.customerComboBox.Location = new System.Drawing.Point(158, 33);
+            this.customerComboBox.MaxDropDownItems = 100;
             this.customerComboBox.Name = "customerComboBox";
             this.customerComboBox.Size = new System.Drawing.Size(223, 21);
             this.customerComboBox.TabIndex = 1;
@@ -108,8 +110,10 @@
             // 
             // productComboBox
             // 
+            this.productComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.productComboBox.FormattingEnabled = true;
             this.productComboBox.Location = new System.Drawing.Point(158, 72);
+            this.productComboBox.MaxDropDownItems = 100;
             this.productComboBox.Name = "productComboBox";
             this.productComboBox.Size = new System.Drawing.Size(223, 21);
             this.productComboBox.TabIndex = 2;
@@ -153,6 +157,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "CreateIncidentForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Tag = "Validator";
             this.Text = "Create Incident";
             this.ResumeLayout(false);
