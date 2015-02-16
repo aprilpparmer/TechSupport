@@ -1,31 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
-using TechSupport.Controller;
 using TechSupport.Model;
 
 namespace TechSupport.DAL
 {
     /// <summary>
-    /// Gets information from the Products database
+    /// Gets information from the Technicians database
     /// </summary>
-    class ProductsDAL
+    class TechniciansDAL
     {
         /// <summary>
-        /// Gets all of the product names from the database
+        /// Gets all technician names from the database
         /// </summary>
-        /// <returns>List of product names</returns>
-        public static List<Products> GetAllProducts()
+        /// <returns></returns>
+        public static List<Technicians> GetAllTechnicians()
         {
             try
             {
-                List<Products> productList = new List<Products>();
+                List<Technicians> technicianList = new List<Technicians>();
                 SqlConnection connection = DBConnection.GetConnection();
                 string selectStatement =
-                    "SELECT Name FROM Products ";
+                    "SELECT Name FROM Technicians ORDER BY Name ASC ";
                 SqlCommand selectCommand = new SqlCommand(selectStatement, connection);
                 try
                 {
@@ -33,9 +32,9 @@ namespace TechSupport.DAL
                     SqlDataReader reader = selectCommand.ExecuteReader();
                     while (reader.Read())
                     {
-                        Products product = new Products();
-                        product.ProductName = reader["Name"].ToString();
-                        productList.Add(product);
+                        Technicians technician = new Technicians();
+                        technician.TechnicianName = reader["Name"].ToString();
+                        technicianList.Add(technician);
                     }
                     reader.Close();
                 }
@@ -47,7 +46,7 @@ namespace TechSupport.DAL
                 {
                     connection.Close();
                 }
-                return productList;
+                return technicianList;
             }
             catch (SqlException ex)
             {

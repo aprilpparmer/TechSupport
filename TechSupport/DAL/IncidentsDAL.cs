@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TechSupport.Model;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace TechSupport.DAL
 {
@@ -109,6 +110,54 @@ namespace TechSupport.DAL
             {
                 throw ex;
             }
+        }
+
+        public static Incidents GetIncident(int incidentID)
+        {
+            Incidents incident = new Incidents();
+            SqlConnection connection = DBConnection.GetConnection();
+            string selectStatement =
+                "SELECT i.IncidentID, c.Name AS Customer, p.Name AS Product, " + 
+                "t.Name AS Technician, " +
+		        "i.Title, i.DateOpened, i.Description " +
+                "FROM Incidents i " +	
+	            "LEFT OUTER JOIN Technicians t ON t.TechID = i.TechID " +
+	            "JOIN Customers c ON c.CustomerID = i.CustomerID " +
+            	"JOIN Products p ON p.ProductCode = i.ProductCode " +
+                "WHERE IncidentID = @IncidentID";
+            SqlCommand selectCommand =
+                new SqlCommand(selectStatement, connection);
+            selectCommand.Parameters.AddWithValue("@IncidentID", incidentID);
+            try
+            {
+                connection.Open();
+                SqlDataReader reader =
+                    selectCommand.ExecuteReader(CommandBehavior.SingleRow);
+                if (reader.Read())
+                {
+                    incident.IncidentID = (int)reader["IncidentID"];
+                    incident.CustomerName = reader["Customer"].ToString();
+                    incident.ProductName = reader["Product"].ToString();
+                    incident.Technician = reader["Technician"].ToString();
+                    incident.Title = reader["Title"].ToString();
+                    incident.DateOpened = (DateTime)reader["DateOpened"];
+                    incident.Description = reader["Description"].ToString();
+                }
+                else
+                {
+                    incident = null;
+                }
+                reader.Close();
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return incident;
         }
     }
 }

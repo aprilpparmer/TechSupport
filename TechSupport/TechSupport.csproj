@@ -47,14 +47,17 @@
     <Compile Include="Controller\CustomersController.cs" />
     <Compile Include="Controller\IncidentsController.cs" />
     <Compile Include="Controller\ProductsController.cs" />
+    <Compile Include="Controller\TechniciansController.cs" />
     <Compile Include="Controller\Validator.cs" />
     <Compile Include="DAL\CustomersDAL.cs" />
     <Compile Include="DAL\DBConnection.cs" />
     <Compile Include="DAL\IncidentsDAL.cs" />
     <Compile Include="DAL\ProductsDAL.cs" />
+    <Compile Include="DAL\TechniciansDAL.cs" />
     <Compile Include="Model\Customers.cs" />
     <Compile Include="Model\Incidents.cs" />
     <Compile Include="Model\Products.cs" />
+    <Compile Include="Model\Technicians.cs" />
     <Compile Include="View\CreateIncidentForm.cs">
       <SubType>Form</SubType>
     </Compile>

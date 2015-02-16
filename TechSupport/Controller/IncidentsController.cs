@@ -37,5 +37,16 @@ namespace TechSupport.Controller
         {
             return IncidentsDAL.AddIncident(incident);
         }
+
+        /// <summary>
+        /// Calls the GetIncident method of the IncidentsDAL class
+        /// to get all of the Incident's information
+        /// </summary>
+        /// <param name="incidentID">IncidentID of the referred to Incident</param>
+        /// <returns>The Incident Information</returns>
+        public static Incidents GetIncident(int incidentID)
+        {
+            return IncidentsDAL.GetIncident(incidentID);
+        }
     }
 }
