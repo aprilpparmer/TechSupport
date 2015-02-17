@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.incidentIDLabel = new System.Windows.Forms.Label();
             this.textToAddLabel = new System.Windows.Forms.Label();
             this.descriptionLabel = new System.Windows.Forms.Label();
@@ -44,10 +45,15 @@
             this.txtCustomer = new System.Windows.Forms.TextBox();
             this.txtToAdd = new System.Windows.Forms.TextBox();
             this.technicianComboBox = new System.Windows.Forms.ComboBox();
+            this.techniciansBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.techSupportDataSet2 = new TechSupport.TechSupportDataSet2();
             this.getIncidentButton = new System.Windows.Forms.Button();
             this.updateIncidentButton = new System.Windows.Forms.Button();
             this.closeIncidentButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.techniciansTableAdapter = new TechSupport.TechSupportDataSet2TableAdapters.TechniciansTableAdapter();
+            ((System.ComponentModel.ISupportInitialize)(this.techniciansBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.techSupportDataSet2)).BeginInit();
             this.SuspendLayout();
             // 
             // incidentIDLabel
@@ -196,6 +202,9 @@
             // 
             // technicianComboBox
             // 
+            this.technicianComboBox.DataSource = this.techniciansBindingSource;
+            this.technicianComboBox.DisplayMember = "Name";
+            this.technicianComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.technicianComboBox.Enabled = false;
             this.technicianComboBox.FormattingEnabled = true;
             this.technicianComboBox.Location = new System.Drawing.Point(114, 109);
@@ -204,6 +213,17 @@
             this.technicianComboBox.Size = new System.Drawing.Size(268, 21);
             this.technicianComboBox.TabIndex = 3;
             this.technicianComboBox.Tag = "Technician";
+            this.technicianComboBox.ValueMember = "TechID";
+            // 
+            // techniciansBindingSource
+            // 
+            this.techniciansBindingSource.DataMember = "Technicians";
+            this.techniciansBindingSource.DataSource = this.techSupportDataSet2;
+            // 
+            // techSupportDataSet2
+            // 
+            this.techSupportDataSet2.DataSetName = "TechSupportDataSet2";
+            this.techSupportDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // getIncidentButton
             // 
@@ -247,11 +267,15 @@
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
+            // techniciansTableAdapter
+            // 
+            this.techniciansTableAdapter.ClearBeforeFill = true;
+            // 
             // UpdateIncidentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(423, 466);
+            this.ClientSize = new System.Drawing.Size(423, 477);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.closeIncidentButton);
             this.Controls.Add(this.updateIncidentButton);
@@ -276,6 +300,8 @@
             this.Padding = new System.Windows.Forms.Padding(5);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Update Incident";
+            ((System.ComponentModel.ISupportInitialize)(this.techniciansBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.techSupportDataSet2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -303,5 +329,8 @@
         private System.Windows.Forms.Button updateIncidentButton;
         private System.Windows.Forms.Button closeIncidentButton;
         private System.Windows.Forms.Button cancelButton;
+        private TechSupportDataSet2 techSupportDataSet2;
+        private System.Windows.Forms.BindingSource techniciansBindingSource;
+        private TechSupportDataSet2TableAdapters.TechniciansTableAdapter techniciansTableAdapter;
     }
 }

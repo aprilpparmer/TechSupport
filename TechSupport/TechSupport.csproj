@@ -44,20 +44,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\CustomersController.cs" />
     <Compile Include="Controller\IncidentsController.cs" />
-    <Compile Include="Controller\ProductsController.cs" />
     <Compile Include="Controller\TechniciansController.cs" />
     <Compile Include="Controller\Validator.cs" />
-    <Compile Include="DAL\CustomersDAL.cs" />
     <Compile Include="DAL\DBConnection.cs" />
     <Compile Include="DAL\IncidentsDAL.cs" />
-    <Compile Include="DAL\ProductsDAL.cs" />
     <Compile Include="DAL\TechniciansDAL.cs" />
-    <Compile Include="Model\Customers.cs" />
     <Compile Include="Model\Incidents.cs" />
-    <Compile Include="Model\Products.cs" />
     <Compile Include="Model\Technicians.cs" />
+    <Compile Include="TechSupportDataSet.cs">
+      <DependentUpon>TechSupportDataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TechSupportDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TechSupportDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="TechSupportDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TechSupportDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="TechSupportDataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TechSupportDataSet2.xsd</DependentUpon>
+    </Compile>
     <Compile Include="View\CreateIncidentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +127,39 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="TechSupportDataSet.xsc">
+      <DependentUpon>TechSupportDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="TechSupportDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TechSupportDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="TechSupportDataSet.xss">
+      <DependentUpon>TechSupportDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="TechSupportDataSet1.xsc">
+      <DependentUpon>TechSupportDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="TechSupportDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TechSupportDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="TechSupportDataSet1.xss">
+      <DependentUpon>TechSupportDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="TechSupportDataSet2.xsc">
+      <DependentUpon>TechSupportDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="TechSupportDataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TechSupportDataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="TechSupportDataSet2.xss">
+      <DependentUpon>TechSupportDataSet2.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -8,14 +8,22 @@ namespace TechSupport.Model
 {
     class Technicians
     {
-        private string technicianName;
+        private string technician;
         private int techID;
+        public Technicians() { }
+    
+        public String Technician
+        {
+            get
+            {
+                return technician;
+            }
+            set
+            {
+                technician = value;
+            }
+        }
 
-        public Technicians() {}
-
-        /// <summary>
-        /// Gets and Sets the TechID
-        /// </summary>
         public int TechID
         {
             get
@@ -27,20 +35,7 @@ namespace TechSupport.Model
                 techID = value;
             }
         }
-
-        /// <summary>
-        /// Gets and Sets the Technician Name
-        /// </summary>
-        public string TechnicianName
-        {
-            get 
-            {
-                return technicianName;
-            }
-            set
-            {
-                technicianName = value;
-            }
-        }
+    
+    
     }
 }

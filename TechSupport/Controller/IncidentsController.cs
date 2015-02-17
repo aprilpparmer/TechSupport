@@ -61,6 +61,12 @@ namespace TechSupport.Controller
             return IncidentsDAL.UpdateIncident(oldIncident, newIncident);
         }
 
+        /// <summary>
+        /// Calls the CloseIncident method of the IncidentsDAL class
+        /// to change the CloseDate of an Incident
+        /// </summary>
+        /// <param name="incidentID">IncidentID of the Incident to Close</param>
+        /// <returns></returns>
         public static bool CloseIncident(int incidentID)
         {
             return IncidentsDAL.CloseIncident(incidentID);

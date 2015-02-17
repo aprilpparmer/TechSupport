@@ -15,15 +15,15 @@ namespace TechSupport.View
 {
     public partial class UpdateIncidentForm : Form
     {
-
-        private TechniciansController techController;
         private Incidents incident;
+        private Incidents newIncident;
+        private List<Technicians> techList;
 
         public UpdateIncidentForm()
         {
             InitializeComponent();
-            this.techController = new TechniciansController();
-            this.loadTechnicianNames();
+            incident = new Incidents();
+            newIncident = new Incidents();
         }
 
         /// <summary>
@@ -70,14 +70,18 @@ namespace TechSupport.View
 
         private void DisplayIncident()
         {
+            technicianComboBox.Enabled = true;
+            this.LoadTechComboBox(); ;
+            if (incident.TechID == null)
+            {
+                technicianComboBox.SelectedIndex = -1;
+            }
+            else
+            {
+                technicianComboBox.SelectedText = incident.Technician;
+            }
             txtCustomer.Text = incident.CustomerName;
             txtProduct.Text = incident.ProductName;
-            technicianComboBox.Enabled = true;
-            if (incident.Technician != null)
-            {
-                technicianComboBox.SelectedItem = incident.Technician;
-            }
-            else technicianComboBox.SelectedIndex = -1;
             txtTitle.Text = incident.Title;
             txtDateOpened.Text = incident.DateOpened.ToString("d");
             txtDescription.Text = incident.Description;
@@ -89,53 +93,32 @@ namespace TechSupport.View
         }
 
         /// <summary>
-        /// Loads the technician names into a combo box
+        /// Updates the incident with new information
         /// </summary>
-        private void loadTechnicianNames()
-        {
-            List<Technicians> technicianList;
-            try
-            {
-                technicianList = this.techController.GetAllTechnicians();
-                if (technicianList.Count > 0)
-                {
-                    Technicians technician;
-                    for (int i = 0; i < technicianList.Count; i++)
-                    {
-                        technician = technicianList[i];
-                        technicianComboBox.Items.Add(technician.TechnicianName);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("There are no technician names to display.");
-                    this.Close();
-                }
-                technicianComboBox.SelectedIndex = -1;
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message, ex.GetType().ToString());
-            }
-        }
-
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void updateIncidentButton_Click(object sender, EventArgs e)
-        {
-            Incidents newIncident = new Incidents();
-            newIncident.IncidentID = incident.IncidentID;
-            this.PutIncidentData(newIncident);
+        {   
+            newIncident = incident;
             try
                 {
-                    bool updated = IncidentsController.UpdateIncident(incident, newIncident);
-
-                    if (updated)
+                    this.PutIncidentData(newIncident);
+                    if (newIncident.Description.Length > 200)
                     {
-                        MessageBox.Show("You have successfully updated the incident.");
-                        Close();
+                        MessageBox.Show("Only 200 characters are allowed for a description.");
                     }
                     else
                     {
-                        MessageBox.Show("The incident could not be updated at ths time");
+                        bool updated = IncidentsController.UpdateIncident(incident, newIncident);
+                        if (updated)
+                        {
+                            MessageBox.Show("You have successfully updated the incident.");
+                            Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("The incident could not be updated at ths time");
+                        }
                     }
                 }
             catch (SqlException ex)
@@ -148,27 +131,58 @@ namespace TechSupport.View
             }
         }
 
+        /// <summary>
+        /// Sets the data in the form to an Incident object to be updated in the database
+        /// </summary>
+        /// <param name="incident"></param>
         private void PutIncidentData(Incidents incident)
         {
-            incident.TechID = TechniciansController.GetTechID(technicianComboBox.SelectedItem.ToString());
-            incident.Description = txtDescription.Text + Environment.NewLine + 
-                "<" + DateTime.Now.ToString("d") + "> " + txtToAdd.Text;
+            try
+            {
+                if (technicianComboBox.SelectedIndex > -1)
+                {
+                    incident.TechID = (int)technicianComboBox.SelectedValue;
+                }
+
+                if (txtToAdd.Text == "")
+                {
+                    txtToAdd.Text = "Technician was updated.";
+                }
+                incident.Description = txtDescription.Text + Environment.NewLine +
+                    "<" + DateTime.Now.ToString("d") + "> " + txtToAdd.Text;
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().ToString());
+            }
         }
 
+        /// <summary>
+        /// Closes the UpdateIncidentForm
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void closeIncidentButton_Click(object sender, EventArgs e)
         {
             try
             {
-                bool updated = IncidentsController.CloseIncident(incident.IncidentID);
-
-                if (updated)
+                bool updated;
+                if (incident.DateClosed == DateTime.MinValue)
                 {
-                    MessageBox.Show("You have successfully closed the incident.");
-                    Close();
+                    updated = IncidentsController.CloseIncident(incident.IncidentID);
+                    if (updated)
+                    {
+                        MessageBox.Show("You have successfully closed the incident.");
+                        Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("The incident could not be closed at ths time");
+                    } 
                 }
                 else
                 {
-                    MessageBox.Show("The incident could not be closed at ths time");
+                    MessageBox.Show("The incident has already been closed. " + incident.DateClosed.ToString());
                 }
             }
             catch (SqlException ex)
@@ -181,6 +195,23 @@ namespace TechSupport.View
             }
         }
 
+        /// <summary>
+        /// Loads the technician combo box
+        /// </summary>
+        private void LoadTechComboBox()
+        {
+            try
+            {
+                techList = TechniciansController.GetTechniciansList();
+                technicianComboBox.DataSource = techList;
+                technicianComboBox.DisplayMember = "Technician";
+                technicianComboBox.ValueMember = "TechID";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().ToString());
+            }
+        }
 
     }
 }

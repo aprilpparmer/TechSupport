@@ -11,19 +11,79 @@ namespace TechSupport.Model
     /// </summary>
     public class Incidents
     {
-        private string productCode;
-        private string productName;
-        private DateTime dateOpened;
         private string customerName;
         private string technician;
+        private string productName;
+        private string productCode;
+        private DateTime dateOpened;
+        private int customerID;
         private string title;
         private string description;
         private int incidentID;
-        private int techID;
-        
+        private int? techID;
+        private DateTime dateClosed;
         public Incidents() {}
 
-        public int TechID
+        public DateTime DateClosed
+        {
+            get
+            {
+                return dateClosed;
+            }
+            set
+            {
+                dateClosed = value;
+            }
+        }
+        public int CustomerID
+        {
+            get
+            {
+                return customerID;
+            }
+            set
+            {
+                customerID = value;
+            }
+        }
+
+        public string CustomerName
+        {
+            get 
+            {
+                return customerName;
+            }
+            set 
+            {
+                customerName = value;
+            }
+        }
+
+        public string Technician
+        {
+            get
+            {
+                return technician;
+            }
+            set
+            {
+                technician = value;
+            }
+        }
+
+        public string ProductName
+        {
+            get
+            {
+                return productName;
+            }
+            set
+            {
+                productName = value;
+            }
+        }
+
+        public int? TechID
         {
             get
             {
@@ -70,17 +130,6 @@ namespace TechSupport.Model
                 description = value;
             }
         }
-        public string ProductName
-        {
-            get
-            {
-                return productName;
-            }
-            set
-            {
-                productName = value;
-            }
-        }
 
         public DateTime DateOpened 
         {
@@ -91,30 +140,6 @@ namespace TechSupport.Model
             set
             {
                 dateOpened = value;
-            }
-        }
-
-        public string CustomerName
-        {
-            get
-            {
-                return customerName;
-            }
-            set
-            {
-                customerName = value;
-            }
-        }
-
-        public string Technician
-        {
-            get
-            {
-                return technician;
-            }
-            set
-            {
-                technician = value;
             }
         }
 

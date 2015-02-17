@@ -8,23 +8,15 @@ using TechSupport.Model;
 
 namespace TechSupport.Controller
 {
-    /// <summary>
-    /// Interacts with the TechniciansDAL to deliver data to the view.
-    /// </summary>
     class TechniciansController
     {
         /// <summary>
-        /// Gets all of the technician names from the database
+        /// Gets the list of technicians
         /// </summary>
-        /// <returns>List of technician names</returns>
-        public List<Technicians> GetAllTechnicians()
+        /// <returns></returns>
+        public static List<Technicians> GetTechniciansList()
         {
-            return TechniciansDAL.GetAllTechnicians();
-        }
-
-        public static int GetTechID(String techName)
-        {
-            return TechniciansDAL.GetTechID(techName);
+            return TechniciansDAL.GetTechniciansList();
         }
     }
 }

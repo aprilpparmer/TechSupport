@@ -75,17 +75,15 @@ namespace TechSupport.DAL
             string insertStatement =
                 "INSERT INTO Incidents " +
                     "(CustomerID, ProductCode, DateOpened, Title, Description) " +
-                    "VALUES ((SELECT CustomerID FROM Customers WHERE Name = @CustomerName), " +
-                    "(SELECT ProductCode FROM Products WHERE Name = @ProductName), " +
-                    "@DateOpened, @Title, @Description)";
+                    "VALUES (@CustomerID, @ProductCode, @DateOpened, @Title, @Description)";
             try
             {
                 using (SqlConnection connection = DBConnection.GetConnection())
                 {
                     using (SqlCommand insertCommand = new SqlCommand(insertStatement, connection))
                     {
-                        insertCommand.Parameters.AddWithValue("@CustomerName", incident.CustomerName);
-                        insertCommand.Parameters.AddWithValue("@ProductName", incident.ProductName);
+                        insertCommand.Parameters.AddWithValue("@CustomerID", incident.CustomerID);
+                        insertCommand.Parameters.AddWithValue("@ProductCode", incident.ProductCode);
                         insertCommand.Parameters.AddWithValue("@DateOpened", incident.DateOpened);
                         insertCommand.Parameters.AddWithValue("@Title", incident.Title);
                         insertCommand.Parameters.AddWithValue("@Description", incident.Description);
@@ -110,14 +108,19 @@ namespace TechSupport.DAL
             }
         }
 
+        /// <summary>
+        /// Gets a specific Incident from the database
+        /// </summary>
+        /// <param name="incidentID"></param>
+        /// <returns></returns>
         public static Incidents GetIncident(int incidentID)
         {
             Incidents incident = new Incidents();
             
             string selectStatement =
                 "SELECT i.IncidentID, c.Name AS Customer, p.Name AS Product, " + 
-                "t.Name AS Technician, " +
-		        "i.Title, i.DateOpened, i.Description " +
+                "t.Name AS Technician, t.TechID, " +
+		        "i.Title, i.DateOpened, i.Description, i.DateClosed " +
                 "FROM Incidents i " +	
 	            "LEFT OUTER JOIN Technicians t ON t.TechID = i.TechID " +
 	            "JOIN Customers c ON c.CustomerID = i.CustomerID " +
@@ -144,6 +147,18 @@ namespace TechSupport.DAL
                                 incident.Title = reader["Title"].ToString();
                                 incident.DateOpened = (DateTime)reader["DateOpened"];
                                 incident.Description = reader["Description"].ToString();
+                                if (reader["DateClosed"] != DBNull.Value)
+                                {
+                                    incident.DateClosed = (DateTime)reader["DateClosed"];
+                                }
+                                if (reader["TechID"] != DBNull.Value)
+                                {
+                                    incident.TechID = Convert.ToInt32(reader["TechID"]);
+                                }
+                                else
+                                {
+                                    incident.TechID = null;
+                                }
                             }
                             else
                             {
@@ -176,10 +191,7 @@ namespace TechSupport.DAL
                 "UPDATE Incidents SET " +
                   "TechID = @NewTechID, " +
                   "Description = @NewDescription " +
-                "WHERE IncidentID = @OldIncidentID " +
-                "AND (TechID = @OldTechID " +
-                        "OR TechID IS NULL AND @OldTechID IS NULL) " +
-                  "AND Description = @OldDescription";
+                "WHERE IncidentID = @OldIncidentID";
             try
             {
                 using (SqlConnection connection = DBConnection.GetConnection())
@@ -190,7 +202,6 @@ namespace TechSupport.DAL
                         updateCommand.Parameters.AddWithValue("@NewTechID", newIncident.TechID);
                         updateCommand.Parameters.AddWithValue("@NewDescription", newIncident.Description);
                         updateCommand.Parameters.AddWithValue("@OldIncidentID", oldIncident.IncidentID);
-                        updateCommand.Parameters.AddWithValue("@OldTechID", oldIncident.TechID);
                         updateCommand.Parameters.AddWithValue("@OldDescription", oldIncident.Description);
 
                         int count = updateCommand.ExecuteNonQuery();
@@ -220,7 +231,7 @@ namespace TechSupport.DAL
         {
             string updateStatement =
                 "UPDATE Incidents SET " +
-                "DateClosed = @dateClosed " +
+                "DateClosed = @NewDateClosed " +
                 "WHERE IncidentID = @incidentID";
             try
             {
@@ -229,7 +240,7 @@ namespace TechSupport.DAL
                     connection.Open();
                     using (SqlCommand updateCommand = new SqlCommand(updateStatement, connection))
                     {
-                        updateCommand.Parameters.AddWithValue("@dateClosed", DateTime.Now);
+                        updateCommand.Parameters.AddWithValue("@NewDateClosed", DateTime.Now);
                         updateCommand.Parameters.AddWithValue("@incidentID", incidentID);
                         int count = updateCommand.ExecuteNonQuery();
                         if (count > 0)

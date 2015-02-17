@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -38,6 +39,16 @@
             this.productComboBox = new System.Windows.Forms.ComboBox();
             this.createIncidentBtn = new System.Windows.Forms.Button();
             this.cancelBtn = new System.Windows.Forms.Button();
+            this.techSupportDataSet = new TechSupport.TechSupportDataSet();
+            this.customersBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.customersTableAdapter = new TechSupport.TechSupportDataSetTableAdapters.CustomersTableAdapter();
+            this.techSupportDataSet1 = new TechSupport.TechSupportDataSet1();
+            this.productsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.productsTableAdapter = new TechSupport.TechSupportDataSet1TableAdapters.ProductsTableAdapter();
+            ((System.ComponentModel.ISupportInitialize)(this.techSupportDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customersBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.techSupportDataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -90,6 +101,8 @@
             // 
             // customerComboBox
             // 
+            this.customerComboBox.DataSource = this.customersBindingSource;
+            this.customerComboBox.DisplayMember = "Name";
             this.customerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.customerComboBox.FormattingEnabled = true;
             this.customerComboBox.Location = new System.Drawing.Point(158, 33);
@@ -98,6 +111,7 @@
             this.customerComboBox.Size = new System.Drawing.Size(223, 21);
             this.customerComboBox.TabIndex = 1;
             this.customerComboBox.Tag = "CustomerName";
+            this.customerComboBox.ValueMember = "CustomerID";
             // 
             // descriptionTextBox
             // 
@@ -110,6 +124,8 @@
             // 
             // productComboBox
             // 
+            this.productComboBox.DataSource = this.productsBindingSource;
+            this.productComboBox.DisplayMember = "Name";
             this.productComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.productComboBox.FormattingEnabled = true;
             this.productComboBox.Location = new System.Drawing.Point(158, 72);
@@ -118,6 +134,7 @@
             this.productComboBox.Size = new System.Drawing.Size(223, 21);
             this.productComboBox.TabIndex = 2;
             this.productComboBox.Tag = "ProductName";
+            this.productComboBox.ValueMember = "ProductCode";
             // 
             // createIncidentBtn
             // 
@@ -141,6 +158,34 @@
             this.cancelBtn.UseVisualStyleBackColor = true;
             this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
+            // techSupportDataSet
+            // 
+            this.techSupportDataSet.DataSetName = "TechSupportDataSet";
+            this.techSupportDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // customersBindingSource
+            // 
+            this.customersBindingSource.DataMember = "Customers";
+            this.customersBindingSource.DataSource = this.techSupportDataSet;
+            // 
+            // customersTableAdapter
+            // 
+            this.customersTableAdapter.ClearBeforeFill = true;
+            // 
+            // techSupportDataSet1
+            // 
+            this.techSupportDataSet1.DataSetName = "TechSupportDataSet1";
+            this.techSupportDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // productsBindingSource
+            // 
+            this.productsBindingSource.DataMember = "Products";
+            this.productsBindingSource.DataSource = this.techSupportDataSet1;
+            // 
+            // productsTableAdapter
+            // 
+            this.productsTableAdapter.ClearBeforeFill = true;
+            // 
             // CreateIncidentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -160,6 +205,11 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Tag = "Validator";
             this.Text = "Create Incident";
+            this.Load += new System.EventHandler(this.CreateIncidentForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.techSupportDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customersBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.techSupportDataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -177,5 +227,11 @@
         private System.Windows.Forms.ComboBox productComboBox;
         private System.Windows.Forms.Button createIncidentBtn;
         private System.Windows.Forms.Button cancelBtn;
+        private TechSupportDataSet techSupportDataSet;
+        private System.Windows.Forms.BindingSource customersBindingSource;
+        private TechSupportDataSetTableAdapters.CustomersTableAdapter customersTableAdapter;
+        private TechSupportDataSet1 techSupportDataSet1;
+        private System.Windows.Forms.BindingSource productsBindingSource;
+        private TechSupportDataSet1TableAdapters.ProductsTableAdapter productsTableAdapter;
     }
 }

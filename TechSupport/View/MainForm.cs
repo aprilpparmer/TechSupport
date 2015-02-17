@@ -114,7 +114,7 @@ namespace TechSupport
                 {
                     uif = new UpdateIncidentForm();
                     uif.MdiParent = this;
-                    uif.FormClosed += cif_FormClosed;
+                    uif.FormClosed += uif_FormClosed;
                     uif.Show();
                 }
                 else
@@ -125,6 +125,11 @@ namespace TechSupport
                 MessageBox.Show(ex.Message, ex.GetType().ToString());
                 this.Close();
             }
+        }
+
+        void uif_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            uif = null;
         }
     }
 }
