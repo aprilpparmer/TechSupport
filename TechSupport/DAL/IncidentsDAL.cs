@@ -191,7 +191,10 @@ namespace TechSupport.DAL
                 "UPDATE Incidents SET " +
                   "TechID = @NewTechID, " +
                   "Description = @NewDescription " +
-                "WHERE IncidentID = @OldIncidentID";
+                "WHERE IncidentID = @OldIncidentID " +
+                "AND (TechID = @OldTechID " +
+                    "OR TechID IS NULL AND @OldTechID IS NULL) " +
+                "AND Description = @OldDescription";
             try
             {
                 using (SqlConnection connection = DBConnection.GetConnection())
@@ -199,7 +202,15 @@ namespace TechSupport.DAL
                     connection.Open();
                     using (SqlCommand updateCommand = new SqlCommand(updateStatement, connection))
                     {
-                        updateCommand.Parameters.AddWithValue("@NewTechID", newIncident.TechID);
+                        if (oldIncident.TechID == null)
+                            updateCommand.Parameters.AddWithValue("@OldTechID", DBNull.Value);
+                        else 
+                            updateCommand.Parameters.AddWithValue("@OldTechID", oldIncident.TechID);
+                        if (newIncident.TechID == null)
+                            updateCommand.Parameters.AddWithValue("@NewTechID", DBNull.Value);
+                        else
+                            updateCommand.Parameters.AddWithValue("@NewTechID", newIncident.TechID);
+
                         updateCommand.Parameters.AddWithValue("@NewDescription", newIncident.Description);
                         updateCommand.Parameters.AddWithValue("@OldIncidentID", oldIncident.IncidentID);
                         updateCommand.Parameters.AddWithValue("@OldDescription", oldIncident.Description);

@@ -26,6 +26,7 @@ namespace TechSupport
         OpenIncidentsForm f2;
         CreateIncidentForm cif;
         UpdateIncidentForm uif;
+        ViewIncidentsByTechnicianForm vibt;
 
         /// <summary>
         /// Displays the Open Incidents Form
@@ -130,6 +131,37 @@ namespace TechSupport
         void uif_FormClosed(object sender, FormClosedEventArgs e)
         {
             uif = null;
+        }
+
+        /// <summary>
+        /// Displays the View Open Incidents By Technician Form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void viewOpenIncidentByTechnicianToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (vibt == null)
+                {
+                    vibt = new ViewIncidentsByTechnicianForm();
+                    vibt.MdiParent = this;
+                    vibt.FormClosed += vibt_FormClosed;
+                    vibt.Show();
+                }
+                else
+                    vibt.Activate();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().ToString());
+                this.Close();
+            }
+        }
+
+        void vibt_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            vibt = null;
         }
     }
 }

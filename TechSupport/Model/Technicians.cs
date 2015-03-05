@@ -10,8 +10,34 @@ namespace TechSupport.Model
     {
         private string technician;
         private int techID;
+        private string techEmail;
+        private string techPhone;
         public Technicians() { }
-    
+
+        public String TechEmail
+        {
+            get
+            {
+                return techEmail;
+            }
+            set
+            {
+                techEmail = value;
+            }
+        }
+
+        public String TechPhone
+        {
+            get
+            {
+                return techPhone;
+            }
+            set
+            {
+                techPhone = value;
+            }
+        }
+
         public String Technician
         {
             get

@@ -66,11 +66,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TechSupportDataSet1.xsd</DependentUpon>
     </Compile>
-    <Compile Include="TechSupportDataSet2.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TechSupportDataSet2.xsd</DependentUpon>
-    </Compile>
     <Compile Include="View\CreateIncidentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +92,12 @@
     <Compile Include="View\UpdateIncidentForm.Designer.cs">
       <DependentUpon>UpdateIncidentForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\ViewIncidentsByTechnicianForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ViewIncidentsByTechnicianForm.Designer.cs">
+      <DependentUpon>ViewIncidentsByTechnicianForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="View\CreateIncidentForm.resx">
       <DependentUpon>CreateIncidentForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -118,6 +119,10 @@
     <EmbeddedResource Include="View\UpdateIncidentForm.resx">
       <DependentUpon>UpdateIncidentForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\ViewIncidentsByTechnicianForm.resx">
+      <DependentUpon>ViewIncidentsByTechnicianForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\DataSources\TechSupport.Model.Technicians.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -148,17 +153,6 @@
     </None>
     <None Include="TechSupportDataSet1.xss">
       <DependentUpon>TechSupportDataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="TechSupportDataSet2.xsc">
-      <DependentUpon>TechSupportDataSet2.xsd</DependentUpon>
-    </None>
-    <None Include="TechSupportDataSet2.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>TechSupportDataSet2.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="TechSupportDataSet2.xss">
-      <DependentUpon>TechSupportDataSet2.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

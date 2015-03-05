@@ -35,6 +35,7 @@
             this.displayOpenIncidentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createIncidentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewOpenIncidentByTechnicianToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,7 +70,8 @@
             this.incidentsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.displayOpenIncidentsToolStripMenuItem,
             this.createIncidentToolStripMenuItem,
-            this.updateToolStripMenuItem});
+            this.updateToolStripMenuItem,
+            this.viewOpenIncidentByTechnicianToolStripMenuItem});
             this.incidentsToolStripMenuItem.Name = "incidentsToolStripMenuItem";
             this.incidentsToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.incidentsToolStripMenuItem.Text = "Incidents";
@@ -77,23 +79,30 @@
             // displayOpenIncidentsToolStripMenuItem
             // 
             this.displayOpenIncidentsToolStripMenuItem.Name = "displayOpenIncidentsToolStripMenuItem";
-            this.displayOpenIncidentsToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.displayOpenIncidentsToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
             this.displayOpenIncidentsToolStripMenuItem.Text = "Display Open Incidents";
             this.displayOpenIncidentsToolStripMenuItem.Click += new System.EventHandler(this.displayOpenIncidentsToolStripMenuItem_Click);
             // 
             // createIncidentToolStripMenuItem
             // 
             this.createIncidentToolStripMenuItem.Name = "createIncidentToolStripMenuItem";
-            this.createIncidentToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.createIncidentToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
             this.createIncidentToolStripMenuItem.Text = "Create Incident";
             this.createIncidentToolStripMenuItem.Click += new System.EventHandler(this.createIncidentToolStripMenuItem_Click);
             // 
             // updateToolStripMenuItem
             // 
             this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
-            this.updateToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
             this.updateToolStripMenuItem.Text = "Update Incident";
             this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
+            // 
+            // viewOpenIncidentByTechnicianToolStripMenuItem
+            // 
+            this.viewOpenIncidentByTechnicianToolStripMenuItem.Name = "viewOpenIncidentByTechnicianToolStripMenuItem";
+            this.viewOpenIncidentByTechnicianToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
+            this.viewOpenIncidentByTechnicianToolStripMenuItem.Text = "View Open Incidents by Technician";
+            this.viewOpenIncidentByTechnicianToolStripMenuItem.Click += new System.EventHandler(this.viewOpenIncidentByTechnicianToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -122,6 +131,7 @@
         private System.Windows.Forms.ToolStripMenuItem displayOpenIncidentsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem createIncidentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewOpenIncidentByTechnicianToolStripMenuItem;
     }
 }
 
