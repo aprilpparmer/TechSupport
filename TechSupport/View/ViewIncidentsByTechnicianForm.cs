@@ -16,6 +16,7 @@ namespace TechSupport.View
     {
         private Technicians technician;
         private List<Technicians> techniciansList;
+        private List<Incidents> incidentsList;
 
         public ViewIncidentsByTechnicianForm()
         {
@@ -41,16 +42,19 @@ namespace TechSupport.View
                 MessageBox.Show(ex.Message, ex.GetType().ToString());
             }
         }
-
+        
         private void GetTechnicianData()
         {
-            
             try
             {
                 int techID = (int)technicianComboBox.SelectedValue;
                 technician = TechniciansController.GetTechnicianData(techID);
                 techniciansBindingSource.Clear();
-                techniciansBindingSource.Add(technician);
+                techniciansBindingSource.Add(technician);                
+                
+                // Get the list of incidents for the technician
+                incidentsList = IncidentsController.GetTechnicianIncidents(techID);
+                incidentsDataGridView.DataSource = incidentsList;
             }
             catch (Exception ex)
             {

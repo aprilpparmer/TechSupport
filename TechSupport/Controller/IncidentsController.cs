@@ -71,5 +71,10 @@ namespace TechSupport.Controller
         {
             return IncidentsDAL.CloseIncident(incidentID);
         }
+
+        public static List<Incidents> GetTechnicianIncidents(int techID)
+        {
+            return IncidentsDAL.GetTechnicianIncidents(techID);
+        }
     }
 }

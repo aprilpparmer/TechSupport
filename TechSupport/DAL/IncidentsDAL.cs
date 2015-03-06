@@ -270,5 +270,56 @@ namespace TechSupport.DAL
                 throw ex;
             }
         }
+
+        /// <summary>
+        /// Gets a list of incidents for the specified technicians
+        /// </summary>
+        /// <param name="techID"></param>
+        /// <returns></returns>
+        public static List<Incidents> GetTechnicianIncidents(int techID)
+        {
+            List<Incidents> technicianIncidentsList = new List<Incidents>();
+            string selectStatement =
+                "SELECT i.TechID, p.Name AS ProductName, i.DateOpened, " +
+                    "i.DateClosed, c.Name AS CustomerName, i.Title " +
+                "FROM Incidents i " +
+                    "JOIN Customers c ON i.CustomerID = c.CustomerID " +
+                    "JOIN Products p ON i.ProductCode = p.ProductCode " +
+                "WHERE i.TechID = @TechID AND i.DateClosed IS NULL";
+            try
+            {
+                using (SqlConnection connection = DBConnection.GetConnection())
+                {
+                    connection.Open();
+                    using (SqlCommand selectCommand = new SqlCommand(selectStatement, connection))
+                    {
+                        selectCommand.Parameters.AddWithValue("@TechID", techID);
+                        using (SqlDataReader reader = selectCommand.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Incidents incident = new Incidents();
+                                //incident.TechID = (int)reader["TechID"];
+                                incident.ProductName = reader["ProductName"].ToString();
+                                incident.DateOpened = (DateTime)reader["DateOpened"];
+                                //incident.DateClosed = (DateTime)reader["DateClosed"];
+                                incident.CustomerName = reader["CustomerName"].ToString();
+                                incident.Title = reader["Title"].ToString();
+                                technicianIncidentsList.Add(incident);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return technicianIncidentsList;
+        }  
     }
 }
