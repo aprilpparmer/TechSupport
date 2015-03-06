@@ -223,7 +223,7 @@
             // 
             // technicianComboBox
             // 
-            this.technicianComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.techniciansBindingSource, "Technician", true));
+            //this.technicianComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.techniciansBindingSource, "Technician", true));
             this.technicianComboBox.DataSource = this.techniciansBindingSource;
             this.technicianComboBox.DisplayMember = "Technician";
             this.technicianComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;

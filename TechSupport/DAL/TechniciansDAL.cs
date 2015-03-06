@@ -10,6 +10,10 @@ namespace TechSupport.DAL
 {
     class TechniciansDAL
     {
+        /// <summary>
+        /// Gets a list of technicians from the database
+        /// </summary>
+        /// <returns>technician list</returns>
         public static List<Technicians> GetTechniciansList() 
         {
             List<Technicians> techniciansList = new List<Technicians>();
@@ -48,6 +52,11 @@ namespace TechSupport.DAL
                 return techniciansList;
         }
 
+        /// <summary>
+        /// Gets the data for a specific technician
+        /// </summary>
+        /// <param name="techID"></param>
+        /// <returns></returns>
         public static Technicians GetTechnicianData(int techID)
         {
             Technicians technician = new Technicians();
@@ -86,6 +95,10 @@ namespace TechSupport.DAL
             return technician;
         }
 
+        /// <summary>
+        /// Gets technicians with open incidents
+        /// </summary>
+        /// <returns>technician list</returns>
         public static List<Technicians> GetTechniciansWithIncidents()
         {
             List<Technicians> techniciansList = new List<Technicians>();

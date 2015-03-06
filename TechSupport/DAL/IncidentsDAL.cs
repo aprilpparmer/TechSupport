@@ -299,10 +299,8 @@ namespace TechSupport.DAL
                             while (reader.Read())
                             {
                                 Incidents incident = new Incidents();
-                                //incident.TechID = (int)reader["TechID"];
                                 incident.ProductName = reader["ProductName"].ToString();
                                 incident.DateOpened = (DateTime)reader["DateOpened"];
-                                //incident.DateClosed = (DateTime)reader["DateClosed"];
                                 incident.CustomerName = reader["CustomerName"].ToString();
                                 incident.Title = reader["Title"].ToString();
                                 technicianIncidentsList.Add(incident);

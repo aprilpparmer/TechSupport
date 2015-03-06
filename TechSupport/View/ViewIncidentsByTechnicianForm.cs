@@ -12,6 +12,9 @@ using TechSupport.Model;
 
 namespace TechSupport.View
 {
+    /// <summary>
+    /// Creates a form used to view open incidents assigned to technicians
+    /// </summary>
     public partial class ViewIncidentsByTechnicianForm : Form
     {
         private Technicians technician;
@@ -23,12 +26,20 @@ namespace TechSupport.View
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Loads the form with the technician and incident data
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ViewIncidentsByTechnicianForm_Load(object sender, EventArgs e)
         {
             this.GetTechniciansWithIncidents();
             this.GetTechnicianData();
         }
 
+        /// <summary>
+        /// Returns the technicians with incidents and populates the combobox
+        /// </summary>
         private void GetTechniciansWithIncidents()
         {
             try
@@ -43,6 +54,9 @@ namespace TechSupport.View
             }
         }
         
+        /// <summary>
+        /// Gets the data for the technician and incidents
+        /// </summary>
         private void GetTechnicianData()
         {
             try
@@ -63,6 +77,11 @@ namespace TechSupport.View
 
         }
 
+        /// <summary>
+        /// Event handler for changing the combobox selected index
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void technicianComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.GetTechnicianData();
