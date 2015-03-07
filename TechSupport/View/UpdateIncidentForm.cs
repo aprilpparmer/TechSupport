@@ -20,11 +20,16 @@ namespace TechSupport.View
     {
         private Incidents incident;
         private List<Technicians> techList;
+        private int technicianSelectedIndex;
+        private bool putIncidentData;
+        private Incidents newIncident;
+
 
         public UpdateIncidentForm()
         {
             InitializeComponent();
             incident = new Incidents();
+            newIncident = new Incidents();
         }
 
         /// <summary>
@@ -49,7 +54,8 @@ namespace TechSupport.View
                 Validator.IsInt32(txtIncidentID))
             {
                 int incidentID = Convert.ToInt32(txtIncidentID.Text);
-                this.GetIncident(incidentID);            
+                this.GetIncident(incidentID);
+                technicianSelectedIndex = technicianComboBox.SelectedIndex;
 
             }
         }
@@ -110,199 +116,8 @@ namespace TechSupport.View
             closeIncidentButton.Enabled = true;
 
         }
-        /*
-        /// <summary>
-        /// Updates the incident with new information
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void updateIncidentButton_Click(object sender, EventArgs e)
-        {
-            Incidents newIncident = new Incidents();
-            newIncident.IncidentID = incident.IncidentID;
-            this.PutIncidentData(newIncident);
-            try
-                {
-                    if (!IncidentsController.UpdateIncident(incident, newIncident))
-                    {
-                        MessageBox.Show("Another user has updated or " +
-                            "deleted that incident.", "Database Error");
-                        this.DialogResult = DialogResult.Retry;
-                    }
-                    else
-                    {
-                        incident = newIncident;
-                        this.DialogResult = DialogResult.OK;
-                    }
-
-                /**
-                this.PutIncidentData(newIncident);
-                bool updated = IncidentsController.UpdateIncident(incident, newIncident);
-                if (updated)
-                {
-                    MessageBox.Show("You have successfully updated the incident.");
-                    this.ClearBoxes();
-                }
-                else
-                {
-                    MessageBox.Show("The incident could not be updated at ths time");
-                }
-                 /
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message, ex.GetType().ToString());
-            }
-        }*/
-
-        /// <summary>
-        /// Updates the incident with new information
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void updateIncidentButton_Click(object sender, EventArgs e)
-        {
-            Incidents newIncident = new Incidents();
-            newIncident.IncidentID = incident.IncidentID;
-
-            try
-            {               
-                string formattedText = txtDescription.Text + Environment.NewLine +
-                    "<" + DateTime.Now.ToString("d") + "> " + txtToAdd.Text;
-                if (formattedText.Length > 200)
-                {
-                    DialogResult dialogResult = MessageBox.Show("Total description can only be 200 characters. Truncate automatically?",
-                        "Confirm", MessageBoxButtons.YesNo);
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        formattedText = formattedText.Substring(0, 200);
-                        newIncident.Description = formattedText;
-                        this.PutIncidentData(newIncident);
-                        bool updated = IncidentsController.UpdateIncident(incident, newIncident);
-                        if (updated)
-                        {
-                            MessageBox.Show("You have successfully updated the incident.");
-                            Close();
-                        }
-                        else
-                        {
-                            MessageBox.Show("The incident could not be updated at ths time");
-                        }
-                    }
-                    else
-                    {
-                        newIncident.Description = formattedText;
-                        this.PutIncidentData(newIncident);
-                        bool updated = IncidentsController.UpdateIncident(incident, newIncident);
-                        if (updated)
-                        {
-                            MessageBox.Show("You have successfully updated the incident.");
-                            Close();
-                        }
-                        else
-                        {
-                            MessageBox.Show("The incident could not be updated at ths time");
-                        }
-                    }
-                }
-
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message, ex.GetType().ToString());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, ex.GetType().ToString());
-            }
-        }
-
-        /// <summary>
-        /// Sets the data in the form to an Incident object to be updated in the database
-        /// </summary>
-        /// <param name="incident"></param>
-        private void PutIncidentData(Incidents incident)
-        {
-            try
-            {
-                incident.TechID = (int)technicianComboBox.SelectedValue;
-
-
-                if (txtToAdd.Text == "")
-                {
-                    txtToAdd.Text = "Technician was updated.";
-                }
-                
-
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message, ex.GetType().ToString());
-            }
-        }
-
-        private string FormattedText()
-        {
-            string formattedText = txtDescription.Text + Environment.NewLine +
-                    "<" + DateTime.Now.ToString("d") + "> " + txtToAdd.Text;
-            if (formattedText.Length > 200)
-            {
-                DialogResult dialogResult = MessageBox.Show("Total description can only be 200 characters. Truncate automatically?", 
-                    "Confirm", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    formattedText = formattedText.Substring(0, 200);
-                }
-            }
-            return formattedText;
-        }
-        /*
-        /// <summary>
-        /// Sets the data in the form to an Incident object to be updated in the database
-        /// </summary>
-        /// <param name="incident"></param>
-        private void PutIncidentData(Incidents newIncident)
-        {
-            try
-            {
-                
-                newIncident.TechID = (int)technicianComboBox.SelectedValue;
-
-                if (newIncident.TechID == incident.TechID)
-                {
-                    if (txtToAdd.Text == "")
-                    {
-                        MessageBox.Show("You must make a change in order to update the incident.");
-                    }
-                    else
-                    {
-                        newIncident.Description = this.FormattedText();
-                    }
-                }
-                else
-                {
-                    if (txtToAdd.Text == "")
-                    {
-                        txtToAdd.Text = "Technician was updated.";
-                    }
-                    else
-                    {
-                        newIncident.Description = this.FormattedText();
-                    }
-                    this.PutIncidentData(newIncident);
-                }
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message, ex.GetType().ToString());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, ex.GetType().ToString());
-            }
-
-        }
-        */
+      
+        
         /// <summary>
         /// Closes the UpdateIncidentForm
         /// </summary>
@@ -365,6 +180,123 @@ namespace TechSupport.View
                 item.Text = "";
             }
             this.technicianComboBox.SelectedIndex = -1;
+        }
+
+        /// <summary>
+        /// Updates the incident in the database when the "Update" button is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void updateIncidentButton_Click(object sender, EventArgs e)
+        {
+            putIncidentData = true;
+            newIncident.IncidentID = incident.IncidentID;
+            this.PutIncidentData(newIncident);
+            try
+            {
+                if (putIncidentData)
+                {
+                    bool updated = IncidentsController.UpdateIncident(incident, newIncident);
+                    if (updated)
+                    {
+                        MessageBox.Show("You have successfully updated the incident.");
+                        ClearBoxes();
+                    }
+                    else
+                    {
+                        MessageBox.Show("The incident could not be updated at this time");
+                        ClearBoxes();
+                    }
+                }
+                else
+                {
+                   
+                    return;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().ToString());
+            }
+        }
+
+        /// <summary>
+        /// Saves the proper new incident data
+        /// </summary>
+        /// <param name="newIncident"></param>
+        /// <returns></returns>
+        private bool PutIncidentData(Incidents newIncident)
+        {
+            try
+            {
+                if (technicianComboBox.SelectedIndex != -1)
+                {
+                    newIncident.TechID = (int)technicianComboBox.SelectedValue;
+                }
+                else
+                {
+                    newIncident.TechID = incident.TechID;
+                }
+                if (technicianComboBox.SelectedIndex == technicianSelectedIndex)
+                {
+                    //check to see if text changed
+                    if (txtToAdd.Text == "")
+                    {
+                        MessageBox.Show("You must make a change in order to update.");
+                        putIncidentData = false;
+                    }
+                    else
+                    {
+                        this.FormatDescription(txtToAdd.Text);
+                    }
+                }
+                else
+                {
+                    if (txtToAdd.Text == "")
+                    {
+                        this.FormatDescription("Technician changed");
+                    }
+                    else
+                    {
+                        this.FormatDescription(txtToAdd.Text);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().ToString());
+            }                
+                return putIncidentData;
+        }
+
+        /// <summary>
+        /// Formats the incident description properly
+        /// </summary>
+        /// <param name="newText"></param>
+        private void FormatDescription(string newText)
+        {
+            string formattedDescription = incident.Description + Environment.NewLine +
+                "<" + DateTime.Now.ToString("d") + "> " + newText;
+            if (formattedDescription.Length > 200) 
+            {
+                DialogResult dialogResult = MessageBox.Show("Total description can only " +
+                    "be 200 characters. Truncate automatically?", "Confirm", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes) {
+                    newIncident.Description = formattedDescription.Substring(0, 200);
+                }
+                else
+                {
+                    putIncidentData = false;
+                    newIncident.Description = incident.Description;
+                    return;
+                }
+            }
+            else
+            {
+                newIncident.Description = formattedDescription;
+            }
         }
     }
 }
