@@ -27,6 +27,7 @@ namespace TechSupport
         CreateIncidentForm cif;
         UpdateIncidentForm uif;
         ViewIncidentsByTechnicianForm vibt;
+        TechnicianOpenIncidentsReport toir;
 
         /// <summary>
         /// Displays the Open Incidents Form
@@ -159,9 +160,49 @@ namespace TechSupport
             }
         }
 
+        /// <summary>
+        /// Closes the view incidents by technician form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void vibt_FormClosed(object sender, FormClosedEventArgs e)
         {
             vibt = null;
+        }
+
+        /// <summary>
+        /// Displays the Report for Open Incidents by Technician
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void displayIncidentsByProductAndTechnicianToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (toir == null)
+                {
+                    toir = new TechnicianOpenIncidentsReport();
+                    toir.MdiParent = this;
+                    toir.FormClosed += toir_FormClosed;
+                    toir.Show();
+                }
+                else
+                    toir.Activate();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().ToString());
+                this.Close();
+            }
+        }
+        /// <summary>
+        /// Closes the open incidents by technician report
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void toir_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            toir = null;
         }
     }
 }
