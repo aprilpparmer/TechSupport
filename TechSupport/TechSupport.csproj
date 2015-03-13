@@ -52,6 +52,11 @@
     <Compile Include="DAL\TechniciansDAL.cs" />
     <Compile Include="Model\Incidents.cs" />
     <Compile Include="Model\Technicians.cs" />
+    <Compile Include="TechnicianIncidents.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TechnicianIncidents.xsd</DependentUpon>
+    </Compile>
     <Compile Include="TechSupportDataSet.cs">
       <DependentUpon>TechSupportDataSet.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -98,6 +103,7 @@
     <Compile Include="View\ViewIncidentsByTechnicianForm.Designer.cs">
       <DependentUpon>ViewIncidentsByTechnicianForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="TechnicianOpenIncidents.rdlc" />
     <EmbeddedResource Include="View\CreateIncidentForm.resx">
       <DependentUpon>CreateIncidentForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -133,6 +139,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="TechnicianIncidents.xsc">
+      <DependentUpon>TechnicianIncidents.xsd</DependentUpon>
+    </None>
+    <None Include="TechnicianIncidents.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TechnicianIncidents.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="TechnicianIncidents.xss">
+      <DependentUpon>TechnicianIncidents.xsd</DependentUpon>
+    </None>
     <None Include="TechSupportDataSet.xsc">
       <DependentUpon>TechSupportDataSet.xsd</DependentUpon>
     </None>
