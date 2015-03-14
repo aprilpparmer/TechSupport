@@ -16,5 +16,13 @@ namespace TechSupport.View
         {
             InitializeComponent();
         }
+
+        private void TechnicianOpenIncidentsReport_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'technicianIncidents.TechnicianOpenIncidents' table. You can move, or remove it, as needed.
+            this.technicianOpenIncidentsTableAdapter.Fill(this.technicianIncidents.TechnicianOpenIncidents);
+
+            this.reportViewer1.RefreshReport();
+        }
     }
 }
