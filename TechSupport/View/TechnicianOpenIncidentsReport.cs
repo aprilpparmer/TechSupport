@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace TechSupport.View
 {
+    /// <summary>
+    /// Creates a report for open incidents that have been assigned a technician
+    /// </summary>
     public partial class TechnicianOpenIncidentsReport : Form
     {
         public TechnicianOpenIncidentsReport()
@@ -17,6 +20,11 @@ namespace TechSupport.View
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Loads the report information for open incidents that have been assigned technicians
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TechnicianOpenIncidentsReport_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'technicianIncidents.TechnicianOpenIncidents' table. You can move, or remove it, as needed.
